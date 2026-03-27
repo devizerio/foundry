@@ -1,6 +1,10 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "@devizerio/foundry",
+  "logo": {
+    "light": "/logo/foundry-logo.png",
+    "dark": "/logo/foundry-logo-dark.png"
+  },
   "favicon": "/favicon.svg",
   "colors": {
     "primary": "#0A0A0A",

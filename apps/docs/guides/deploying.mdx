@@ -1,0 +1,23 @@
+---
+title: Deploying
+description: Deploy to DigitalOcean App Platform
+---
+
+# Deploying
+
+## DigitalOcean App Platform
+
+1. Copy `.do/app.yaml.example` to `.do/app.yaml`
+2. Update with your domain, Supabase credentials, and other env vars
+3. Link your GitHub repo in the DO dashboard
+4. Deploy — DO will auto-build and deploy on push to main
+
+### Build Commands
+
+- **Web**: `pnpm build --filter=@yourproject/web`
+- **Server**: `pnpm build --filter=@yourproject/server`
+
+### Routing
+
+- `/` routes to the web app (port 3000)
+- `/backend` routes to the server (port 3001, prefix stripped)

@@ -1,0 +1,14 @@
+{
+  "name": "@foundry/shared",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "lint": "echo 'no lint configured'"
+  },
+  "devDependencies": {
+    "vitest": "^3"
+  }
+}

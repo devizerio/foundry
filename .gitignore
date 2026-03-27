@@ -1,7 +1,12 @@
 node_modules/
 dist/
+.next/
+.turbo/
 .env
-.env.*
+.env.local
+.env.*.local
 !.env.example
 *.log
 .DS_Store
+*.tsbuildinfo
+supabase/.temp/

@@ -1,0 +1,32 @@
+---
+title: Supabase
+description: Database, auth, and local development
+---
+
+# Supabase (@foundry/supabase)
+
+This package contains the Supabase configuration, migrations, and email templates.
+
+## Local Development
+
+```bash
+cd apps/supabase
+supabase start    # Start local Supabase (requires Docker)
+supabase stop     # Stop local Supabase
+```
+
+## Migrations
+
+Migrations live in `migrations/`. To add a new migration:
+
+1. Create a SQL file: `migrations/NNN_description.sql`
+2. Always enable RLS on new tables
+3. Run: `supabase migration up`
+4. Regenerate types: `../../scripts/generate-types.sh`
+
+## Initial Schema
+
+The default migration creates a `profiles` table that:
+- References `auth.users` (CASCADE delete)
+- Has RLS policies for user self-access
+- Auto-creates a profile on signup via trigger

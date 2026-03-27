@@ -1,0 +1,36 @@
+---
+title: Getting Started
+description: Set up Foundry from scratch
+---
+
+# Getting Started
+
+## Prerequisites
+
+- Node.js 22+
+- pnpm 10+
+- Docker (for local Supabase)
+
+## Setup
+
+```bash
+# 1. Create from template
+gh repo create my-project --template devizerio/foundry --clone
+cd my-project
+
+# 2. Rename the project
+./scripts/rename-project.sh myproject
+
+# 3. Run setup
+./scripts/setup.sh
+
+# 4. Configure environment
+cp apps/web/.env.example apps/web/.env.local
+cp apps/server/.env.example apps/server/.env
+# Edit the .env files with your Supabase credentials
+
+# 5. Start development
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) to see your app.

@@ -1,0 +1,21 @@
+---
+title: Adding Features
+description: How to add full-stack features
+---
+
+# Adding Features
+
+## Full-Stack Feature Workflow
+
+1. **Database**: Create a migration in `apps/supabase/migrations/`
+2. **Types**: Run `./scripts/generate-types.sh` to update TypeScript types
+3. **Shared**: Add app-level types to `packages/shared/src/types.ts` if needed
+4. **Server**: Add Express routes in `apps/server/src/routes/`
+5. **Web**: Add pages in `apps/web/src/app/`
+6. **Test**: Add `*.test.ts` files next to implementation
+
+## Tips
+
+- Use Supabase client directly for simple CRUD — don't create unnecessary API routes
+- Server components are default — only add `'use client'` when you need interactivity
+- Run `pnpm test` frequently to catch regressions

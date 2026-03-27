@@ -1,0 +1,23 @@
+---
+title: Using Claude Code
+description: Get the most out of AI-assisted development
+---
+
+# Using Claude Code
+
+Foundry's `CLAUDE.md` gives Claude Code complete context about your project. Here's how to use it effectively.
+
+## Quick Commands
+
+Ask Claude Code to:
+- "Add a new page at /settings" — it will create the right file with auth checks
+- "Add a database table for posts" — it will create a migration with RLS
+- "Add an Express endpoint for /api/stats" — it will follow the router pattern
+- "Add a shared type for UserProfile" — it will update the shared package
+
+## Tips
+
+1. **Start broad**: "I need a blog feature with posts and comments"
+2. **Claude follows patterns**: It reads CLAUDE.md and matches existing code style
+3. **Test as you go**: Ask Claude to add tests alongside features
+4. **Review the diff**: Always review what Claude generates before committing

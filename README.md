@@ -73,7 +73,7 @@ foundry/
 
 ## Documentation
 
-See [apps/docs](./apps/docs) for full documentation, or run `cd apps/docs && pnpm dev` for local preview.
+Full docs at **[devizer.mintlify.app](https://devizer.mintlify.app)**, or run `cd apps/docs && pnpm dev` for local preview.
 
 ## Contributing
 

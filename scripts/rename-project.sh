@@ -24,12 +24,12 @@ find . -name 'package.json' -not -path '*/node_modules/*' -exec sed -i '' "s|\"n
 
 # Config files — scope references (@foundry/ → @newname/)
 find . \( -name '*.ts' -o -name '*.tsx' -o -name '*.mjs' -o -name '*.json' -o -name '*.yaml' -o -name '*.yml' -o -name '*.md' -o -name '*.mdx' -o -name '*.toml' -o -name '*.example' \) | \
-  grep -v node_modules | grep -v .next | grep -v pnpm-lock | \
+  grep -v node_modules | grep -v -F .next | grep -v pnpm-lock | \
   xargs sed -i '' "s|${OLD_SCOPE}/|${NEW_SCOPE}/|g" 2>/dev/null || true
 
 # Replace standalone "Foundry" (capitalized) in display strings
 find . \( -name '*.ts' -o -name '*.tsx' -o -name '*.md' -o -name '*.json' -o -name '*.mdx' -o -name '*.example' \) | \
-  grep -v node_modules | grep -v .next | grep -v pnpm-lock | \
+  grep -v node_modules | grep -v -F .next | grep -v pnpm-lock | \
   xargs sed -i '' "s|Foundry|${NEW_NAME_CAP}|g" 2>/dev/null || true
 
 # Replace lowercase foundry in identifiers (yaml, toml, example configs, and CLAUDE.md)

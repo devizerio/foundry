@@ -1,0 +1,32 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Foundry",
+  "logo": {
+    "dark": "/logo/dark.svg",
+    "light": "/logo/light.svg"
+  },
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#0A0A0A",
+    "light": "#F5F5F5",
+    "dark": "#0A0A0A"
+  },
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["introduction", "architecture"]
+    },
+    {
+      "group": "Apps",
+      "pages": ["apps/web", "apps/server", "apps/supabase"]
+    },
+    {
+      "group": "Guides",
+      "pages": ["guides/getting-started", "guides/adding-features", "guides/deploying", "guides/claude-code"]
+    },
+    {
+      "group": "Contributing",
+      "pages": ["contributing"]
+    }
+  ]
+}

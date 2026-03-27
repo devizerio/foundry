@@ -1,0 +1,43 @@
+---
+title: Architecture
+description: How Foundry's monorepo is structured
+---
+
+# Architecture
+
+Foundry uses pnpm workspaces + Turborepo to manage a monorepo with multiple apps and packages.
+
+## Directory Structure
+
+```
+foundry/
+├── apps/
+│   ├── web/        Next.js 15 — frontend + SSR
+│   ├── server/     Express 5 — API server
+│   ├── supabase/   Migrations + config
+│   └── docs/       Mintlify docs
+├── packages/
+│   └── shared/     Types + constants
+└── scripts/        Automation utilities
+```
+
+## Data Flow
+
+```
+Browser → Next.js (SSR) → Supabase (auth + data)
+                ↕
+         Express Server → Supabase (service role)
+```
+
+Both the web app and server connect directly to Supabase. There is no inter-service communication by default.
+
+## Key Decisions
+
+| Decision | Choice | Why |
+|----------|--------|-----|
+| Package manager | pnpm | Fast, strict, disk-efficient |
+| Monorepo tool | Turborepo | Zero-config, task caching |
+| CSS | Tailwind v4 | CSS-first config, no JS config file |
+| Auth | Supabase magic link | Passwordless, simple, secure |
+| Server runtime | tsx | No bundler needed, TypeScript directly |
+| Shared package | No build step | Raw TypeScript via `exports` field |

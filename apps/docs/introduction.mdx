@@ -1,0 +1,43 @@
+---
+title: Introduction
+description: Foundry — The AI-native monorepo boilerplate
+---
+
+# Foundry
+
+Foundry is a production-grade monorepo boilerplate designed for teams that build fast with AI-assisted development. It includes everything you need to go from zero to deployed app in minutes.
+
+## What's included
+
+- **Next.js** web app with Tailwind CSS v4, Supabase auth, and shadcn/ui
+- **Express** server with TypeScript, Sentry, and Supabase integration
+- **Supabase** for auth, database, and real-time — with local dev setup
+- **Shared package** for types and constants across apps
+- **Full observability** with PostHog analytics and Sentry error tracking
+- **DigitalOcean** App Platform deployment config
+- **CLAUDE.md** — comprehensive AI context for Claude Code
+
+## The CLAUDE.md Advantage
+
+The `CLAUDE.md` file is Foundry's primary differentiator. It provides Claude Code with complete context about:
+- Architecture and data flow
+- How to add pages, routes, migrations, and shared types
+- Conventions, naming, and anti-patterns
+- Auth flow, deployment, and observability setup
+
+This means Claude Code can start building features immediately — no onboarding needed.
+
+## Quick Start
+
+```bash
+# Clone the template
+gh repo create my-project --template devizerio/foundry --clone
+cd my-project
+
+# Customize the project name
+./scripts/rename-project.sh myproject
+
+# Setup and run
+./scripts/setup.sh
+pnpm dev
+```

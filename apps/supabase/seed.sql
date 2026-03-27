@@ -1,0 +1,4 @@
+-- Seed data for local development
+-- Add your seed data here. This runs after migrations on `supabase db reset`.
+-- Example:
+--   INSERT INTO public.profiles (id) VALUES ('00000000-0000-0000-0000-000000000000');

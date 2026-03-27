@@ -1,0 +1,29 @@
+---
+title: Contributing
+description: How to contribute to Foundry
+---
+
+# Contributing
+
+## Development
+
+```bash
+git clone https://github.com/devizerio/foundry
+cd foundry
+./scripts/setup.sh
+pnpm dev
+```
+
+## Pull Requests
+
+1. Create a branch from `main`
+2. Make your changes
+3. Run `pnpm lint && pnpm test && pnpm build`
+4. Submit a PR
+
+## Code Style
+
+- Prettier handles formatting (run `pnpm format`)
+- TypeScript strict mode is enforced
+- All new database tables must have RLS policies
+- Tests live next to source files

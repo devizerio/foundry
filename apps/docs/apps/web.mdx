@@ -1,0 +1,27 @@
+---
+title: Web App
+description: Next.js frontend with Supabase auth and Tailwind CSS
+---
+
+# Web App (@foundry/web)
+
+The web app is a Next.js 15 application using the App Router, Tailwind CSS v4, and Supabase for authentication.
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/middleware.ts` | Supabase session refresh on every request |
+| `src/lib/supabase/client.ts` | Browser-side Supabase client |
+| `src/lib/supabase/server.ts` | Server-side Supabase client (cookies) |
+| `src/app/auth/callback/route.ts` | OAuth code exchange |
+| `src/app/layout.tsx` | Root layout with Header |
+| `src/globals.css` | Tailwind v4 theme configuration |
+
+## Adding Pages
+
+Create a file at `src/app/<route>/page.tsx`. For protected pages, check auth with `createClient()` from `@/lib/supabase/server`.
+
+## Styling
+
+Tailwind CSS v4 uses CSS-first configuration. Custom theme variables are defined in `src/globals.css` using `@theme inline`. There is no `tailwind.config.ts`.

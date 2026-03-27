@@ -1,0 +1,82 @@
+# DigitalOcean App Platform Configuration
+# Copy to .do/app.yaml and update with your values
+# Docs: https://docs.digitalocean.com/products/app-platform/reference/app-spec/
+
+name: foundry
+region: nyc
+
+domains:
+  - domain: your-domain.com
+    type: PRIMARY
+
+ingress:
+  rules:
+    - component:
+        name: server
+      match:
+        path:
+          prefix: /backend
+    - component:
+        name: web
+      match:
+        path:
+          prefix: /
+
+services:
+  - name: web
+    github:
+      repo: your-org/your-repo
+      branch: main
+      deploy_on_push: true
+    source_dir: /
+    environment_slug: node-js
+    build_command: pnpm build --filter=@foundry/web
+    run_command: cd apps/web && pnpm start
+    http_port: 3000
+    instance_size_slug: basic-xs
+    instance_count: 1
+    envs:
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: your-supabase-url
+      - key: NEXT_PUBLIC_SUPABASE_ANON_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: your-anon-key
+      - key: NEXT_PUBLIC_SITE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: ${APP_URL}
+      - key: NEXT_PUBLIC_POSTHOG_KEY
+        scope: RUN_AND_BUILD_TIME
+        value: ""
+      - key: NEXT_PUBLIC_SENTRY_DSN
+        scope: RUN_AND_BUILD_TIME
+        value: ""
+
+  - name: server
+    github:
+      repo: your-org/your-repo
+      branch: main
+      deploy_on_push: true
+    source_dir: /
+    environment_slug: node-js
+    build_command: pnpm build --filter=@foundry/server
+    run_command: cd apps/server && pnpm start
+    http_port: 3001
+    instance_size_slug: basic-xxs
+    instance_count: 1
+    envs:
+      - key: SUPABASE_URL
+        scope: RUN_AND_BUILD_TIME
+        value: your-supabase-url
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        scope: RUN_AND_BUILD_TIME
+        type: SECRET
+      - key: PORT
+        scope: RUN_AND_BUILD_TIME
+        value: "3001"
+      - key: ALLOWED_ORIGINS
+        scope: RUN_AND_BUILD_TIME
+        value: https://your-domain.com
+      - key: SENTRY_DSN
+        scope: RUN_AND_BUILD_TIME
+        value: ""

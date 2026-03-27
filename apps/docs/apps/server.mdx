@@ -1,0 +1,28 @@
+---
+title: Server
+description: Express API server with TypeScript
+---
+
+# Server (@foundry/server)
+
+The Express server runs with `tsx` (no bundler) and connects to Supabase using a service role key.
+
+## Key Files
+
+| File | Purpose |
+|------|---------|
+| `src/index.ts` | App entry: middleware, routes, error handling |
+| `src/routes/health.ts` | Health check endpoint |
+| `src/lib/supabase.ts` | Supabase client (service role) |
+
+## Adding Routes
+
+1. Create a route file in `src/routes/`
+2. Export a Router
+3. Register in `src/index.ts`
+
+## Development
+
+```bash
+pnpm dev --filter=@foundry/server  # Starts with tsx watch
+```

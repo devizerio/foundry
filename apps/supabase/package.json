@@ -1,0 +1,11 @@
+{
+  "name": "@foundry/supabase",
+  "private": true,
+  "scripts": {
+    "start": "supabase start",
+    "stop": "supabase stop",
+    "reset": "supabase db reset",
+    "migrate": "supabase migration up",
+    "generate-types": "supabase gen types typescript --local > ../../packages/shared/src/database.types.ts"
+  }
+}

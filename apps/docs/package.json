@@ -4,5 +4,8 @@
   "scripts": {
     "dev": "mintlify dev",
     "build": "echo 'Docs are built by Mintlify hosting'"
+  },
+  "devDependencies": {
+    "mintlify": "^4.2.457"
   }
 }

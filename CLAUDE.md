@@ -17,6 +17,9 @@ pnpm format:check # Check formatting
 ./scripts/db-reset.sh        # Reset database + seed + regenerate types
 ./scripts/db-seed.sh         # Seed only
 
+# Secrets (1Password)
+pnpm secrets                 # Populate .env files from 1Password
+
 # Setup
 ./scripts/setup.sh           # First-time setup (install, supabase, types)
 ./scripts/rename-project.sh <name>  # Rename @foundry → @yourproject
@@ -180,6 +183,72 @@ CREATE POLICY "Users can view own data" ON public.my_table
 CREATE POLICY "Users can insert own data" ON public.my_table
   FOR INSERT WITH CHECK (auth.uid() = user_id);
 ```
+
+## Secrets Management (1Password)
+
+Secrets are managed via [1Password CLI](https://developer.1password.com/docs/cli/get-started) using `.env.tpl` template files. These templates use `op://` references that get resolved to real values at inject time.
+
+### How it works
+
+```
+.env.tpl  (committed, contains op:// references)
+    ↓  op inject
+.env.local / .env  (git-ignored, contains real secrets)
+```
+
+- `.env.tpl` files are checked into git — they contain no secrets, only `op://Vault/Item/Field` references
+- `.env` / `.env.local` files are git-ignored — they contain the resolved secret values
+- The `pnpm secrets` command runs `op inject` on each `.tpl` file to produce the corresponding env file
+
+### Quick start
+
+```bash
+# 1. Install the 1Password CLI
+brew install 1password-cli
+
+# 2. Sign in (first time only)
+op signin
+
+# 3. Populate all env files
+pnpm secrets
+```
+
+### Template files
+
+| Template | Output | App |
+|----------|--------|-----|
+| `apps/web/.env.tpl` | `apps/web/.env.local` | Next.js web app |
+| `apps/server/.env.tpl` | `apps/server/.env` | Express server |
+
+### 1Password vault setup
+
+Create a vault called **Foundry** (or rename the `op://` references in the `.tpl` files) with these items:
+
+| Item | Fields |
+|------|--------|
+| **Supabase** | `url`, `anon-key`, `service-role-key` |
+| **PostHog** | `public-key`, `personal-api-key`, `project-id` |
+| **Sentry** | `web-dsn`, `server-dsn` |
+
+### Manual op commands (for reference)
+
+```bash
+# Inject a single template
+op inject -i apps/web/.env.tpl -o apps/web/.env.local --force
+
+# Read a single secret
+op read "op://Foundry/Supabase/anon-key"
+
+# List items in the Foundry vault
+op item list --vault Foundry
+```
+
+### Adding new secrets
+
+1. Add the secret to 1Password (in the Foundry vault)
+2. Add the `op://` reference to the relevant `.env.tpl` file
+3. Add a placeholder to the corresponding `.env.example` file (for non-1Password users)
+4. Run `pnpm secrets` to regenerate your local env files
 
 ## Deployment
 

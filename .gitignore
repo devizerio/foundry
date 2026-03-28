@@ -6,6 +6,7 @@ dist/
 .env.local
 .env.*.local
 !.env.example
+!.env.tpl
 *.log
 .DS_Store
 *.tsbuildinfo
